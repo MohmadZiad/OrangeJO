@@ -125,6 +125,8 @@ export class MemStorage implements IStorage {
     const id = randomUUID();
     const calculation: Calculation = {
       ...insertCalc,
+      input2: insertCalc.input2 ?? null,
+      input3: insertCalc.input3 ?? null,
       id,
       createdAt: new Date(),
     };
@@ -147,6 +149,7 @@ export class MemStorage implements IStorage {
     const proRataAmount = (insertProRata.totalAmount / insertProRata.totalDays) * insertProRata.daysUsed;
     const proRata: ProRata = {
       ...insertProRata,
+      description: insertProRata.description ?? null,
       id,
       proRataAmount,
       createdAt: new Date(),

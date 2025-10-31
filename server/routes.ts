@@ -1,7 +1,8 @@
-import type { Express } from "express";
-import { createServer, type Server } from "http";
+import express, { type Express, type Request, type Response } from "express";
+import type { Server } from "http";
 import { storage } from "./storage";
 import { insertCalculationSchema, insertProRataSchema, insertChatMessageSchema } from "@shared/schema";
+import { chatHandler } from "./chat";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Calculator Routes
@@ -112,6 +113,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/chat", express.json(), chatHandler);
+
   // Document Routes
   app.get("/api/documents", async (req, res) => {
     try {
@@ -142,6 +145,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // /api/docs → file handler from /api folder
+  app.get("/api/docs", async (req: Request, res: Response) => {
+    const mod = await import("../api/docs");
+    return mod.default(req, res);
+  });
+
+  const { createServer } = await import("http");
   const httpServer = createServer(app);
 
   return httpServer;
