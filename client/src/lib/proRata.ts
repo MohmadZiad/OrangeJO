@@ -343,12 +343,13 @@ export function buildScript(o: ProrataOutput, locale: Lang) {
   // Add LRM after numbers/currency to avoid colon flip in RTL blocks
   const monthly = `JD ${fmt3(o.monthlyNet)}${LRM}`;
   const prorata = `JD ${fmt3(o.prorataNet)}${LRM}`;
+  const totalNet = `JD ${fmt3(o.monthlyNet + o.prorataNet)}${LRM}`;
 
   if (locale === "ar") {
-    return `أوضّح لحضرتك أن الفاتورة تغطي الفترة من تاريخ التفعيل ${start} حتى يوم ${end} (يوم 15 القادم)، مع توضيح جزء النسبة والتناسب لهذه الفترة بقيمة ${prorata}. المبلغ المستحق للدفع هو قيمة الاشتراك الشهري فقط وقدره ${monthly}، ويغطي الخدمة مقدماً من ${end} حتى ${next}.`;
+    return `أوضّح لحضرتك أن الفاتورة صدرت بنسبة وتناسب من تاريخ التفعيل ${start} حتى يوم ${end}، وفي نفس الفاتورة تم احتساب قيمة الاشتراك الشهري مقدماً من ${end} حتى ${next}. قيمة الاشتراك الشهري: ${monthly}، وقيمة النسبة والتناسب: ${prorata}، وبالتالي قيمة الفاتورة الكليّة (الصافي قبل الضريبة): ${totalNet}. تاريخ إصدار الفاتورة ${end} وتغطي الخدمة مقدماً حتى ${next}.`;
   }
 
-  return `Just to clarify, the invoice covers the period from the activation date ${start} through ${end} (the upcoming 15th). The pro-rata portion for that window is ${prorata} for reference, but the amount due is only the monthly subscription of ${monthly}, which pre-pays the service from ${end} through ${next}.`;
+  return `Just to clarify, the invoice prorates the service from ${start} through ${end}, and on the same invoice bills the monthly subscription in advance from ${end} until ${next}. Monthly subscription: ${monthly}, pro-rata amount: ${prorata}, so the total (net before VAT) is ${totalNet}. The invoice is issued on ${end} and covers the service in advance until ${next}.`;
 }
 
 /* =========================

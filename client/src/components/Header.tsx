@@ -91,7 +91,7 @@ export default function Header() {
 
           {/* Right section */}
           <div className="flex items-center gap-4">
-            <DocsButton />
+            <DocsButton lang={language} />
             <LanguageSwitcher />
             <ThemeToggle />
             

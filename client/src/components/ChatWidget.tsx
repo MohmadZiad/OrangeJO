@@ -18,11 +18,7 @@ export default function ChatWidget() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           messages: [
-            {
-              role: "system",
-              content:
-                "You are a helpful assistant for the OrangeCompany website. If asked where something is, reply with a short answer and a direct link to the correct page or Google Doc.",
-            },
+            { role: "system", content: "You are a helpful assistant." },
             ...next,
           ],
         }),
