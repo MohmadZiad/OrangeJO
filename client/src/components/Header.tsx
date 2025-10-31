@@ -6,11 +6,12 @@ import ThemeToggle from "./ThemeToggle";
 import LanguageSwitcher from "./LanguageSwitcher";
 import GradientButton from "./GradientButton";
 import { Menu, X } from "lucide-react";
+import DocsButton from "./DocsButton";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [location] = useLocation();
 
   useEffect(() => {
@@ -90,6 +91,7 @@ export default function Header() {
 
           {/* Right section */}
           <div className="flex items-center gap-4">
+            <DocsButton />
             <LanguageSwitcher />
             <ThemeToggle />
             

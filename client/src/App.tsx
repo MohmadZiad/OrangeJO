@@ -13,6 +13,7 @@ import ProRata from "@/pages/ProRata";
 import Assistant from "@/pages/Assistant";
 import Docs from "@/pages/Docs";
 import NotFound from "@/pages/not-found";
+import ChatWidget from "@/components/ChatWidget";
 
 function Router() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <TooltipProvider>
             {showSplash && <SplashScreen onComplete={handleSplashComplete} />}
             {!showSplash && <Router />}
+            {!showSplash && <ChatWidget />}
             <Toaster />
           </TooltipProvider>
         </LanguageProvider>
